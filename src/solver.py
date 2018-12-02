@@ -1,6 +1,7 @@
 import numpy as np
 import fatoracao_lu as lu
 import math
+import heat_map
 from scipy.sparse import csr_matrix
 
 class Solver:
@@ -14,13 +15,14 @@ class Solver:
 
     def solve(self):
         max_difference = 1.0
+        heat_map.draw(self.current_distribution)
         while max_difference > 0 and math.log(max_difference, 10) > -7:
             linearized_distribution = self.get_array_from_distribution(self.current_distribution)
             system_to_solve = self.get_system()
             result = np.array(lu.resolve_lu(system_to_solve, linearized_distribution))
             max_difference = self.calculate_max_difference(linearized_distribution, result)
             self.current_distribution = result.reshape(self.shape[0], self.shape[1])
-
+            heat_map.draw(self.current_distribution)
 
     def calculate_max_difference(self, initial, final):
         return np.max(np.abs(initial-final))
