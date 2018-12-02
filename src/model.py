@@ -25,3 +25,4 @@ class Model:
 
     def u(self, x , y):
         return 2*x + y**2
+
