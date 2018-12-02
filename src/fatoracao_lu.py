@@ -1,3 +1,5 @@
+import numpy as np
+
 def fatoracao_lu(A):
     n = len(A)
 
@@ -13,13 +15,15 @@ def fatoracao_lu(A):
             soma = 0
             for k in range(i):
                 soma += U[k][j] * L[i][k]
-            U[i][j] = A[i][j] - soma
+            dense_a_i = np.array(A[i].todense())
+            U[i][j] = dense_a_i[0][j] - soma
 
         for i in range(j, n):
             soma = 0
             for k in range(j):
                 soma += U[k][j] * L[i][k]
-            L[i][j] = (A[i][j] - soma) / U[j][j]
+            dense_a_i = np.array(A[i].todense())
+            L[i][j] = (dense_a_i[0][j] - soma) / U[j][j]
 
     return (L, U)
 
