@@ -14,6 +14,7 @@ class Solver:
         self.shape = model.shape
 
     def solve(self):
+        heat_map.clearFiles("images/tmp/")#Clear folder
         max_difference = 1.0
         heat_map.draw(self.current_distribution)
         system_to_solve = self.get_system()
@@ -23,6 +24,7 @@ class Solver:
             max_difference = self.calculate_max_difference(linearized_distribution, result)
             self.current_distribution = result.reshape(self.shape[0], self.shape[1])
             heat_map.draw(self.current_distribution)
+        heat_map.generateGif()
 
     def calculate_max_difference(self, initial, final):
         return np.max(np.abs(initial-final))
