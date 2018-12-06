@@ -6,19 +6,20 @@ import matplotlib.pylab as plt
 import imageio
 
 
-def draw(matrix):
+def draw(matrix, ic):
+    plt.clf()
     ax = sns.heatmap(matrix, cmap="coolwarm")
     if not os.path.exists("images/tmp"):
         os.makedirs("images/tmp")
     plt.savefig("images/tmp/img_" + str(time.time()) + ".png")
-    plt.show()
+    #plt.show()
 
 
 def generateGif():
     directory = "images/tmp/"
     if not os.path.exists("images/gif"):
         os.makedirs("images/gif")
-    with imageio.get_writer('images/gif/movie.gif', mode='I', duration=0.5) as writer:
+    with imageio.get_writer('images/gif/movie.gif', mode='I', duration=1.2) as writer:
         for filename in sorted(os.listdir(directory)):
             image = imageio.imread(directory + filename)
             writer.append_data(image)
