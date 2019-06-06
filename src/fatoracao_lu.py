@@ -1,5 +1,7 @@
 import numpy as np
+from intpy import deterministic
 
+@deterministic
 def fatoracao_lu(A):
     n = len(A)
 
