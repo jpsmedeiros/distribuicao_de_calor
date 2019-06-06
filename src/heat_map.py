@@ -11,7 +11,8 @@ def draw(matrix):
     if not os.path.exists("images/tmp"):
         os.makedirs("images/tmp")
     plt.savefig("images/tmp/img_" + str(time.time()) + ".png")
-    plt.show()
+    plt.close()
+    #plt.show()
 
 
 def generateGif():
